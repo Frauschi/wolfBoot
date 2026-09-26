@@ -1339,6 +1339,7 @@ ifneq (,$(filter aurix_tc4xx aurix_tc4xx_csrm,$(TARGET)))
                 $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_client.o \
                 $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_hh_host.o \
                 $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_spr_apu.o \
+                $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_lmu_apu.o \
                 $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_dma_client.o \
                 $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_time.o \
                 $(WOLFBOOT_LIB_WOLFHSM)/src/wh_transport_mem.o

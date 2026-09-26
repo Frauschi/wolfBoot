@@ -2545,6 +2545,12 @@ ifeq ($(ARCH), AURIX)
     # No TriCore asm in wolfCrypt
     MATH_OBJS+=$(WOLFBOOT_LIB_WOLFSSL)/wolfcrypt/src/sp_c32.o
 
+    # wolfHSM port CommBuf placement: COMMBUF=DSPR (default) or LMU
+    ifeq ($(COMMBUF),LMU)
+      CFLAGS += -DTCHSM_CFG_COMMBUF_LMU
+      LDFLAGS += -Wl,--defsym=TCHSM_LSL_COMMBUF_LMU=1
+    endif
+
     # wolfHSM support
     ifneq ($(filter 1,$(WOLFHSM_CLIENT) $(WOLFHSM_SERVER)),)
       # Common wolfHSM port files.
@@ -2569,6 +2575,7 @@ ifeq ($(ARCH), AURIX)
       OBJS += $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_client.o \
               $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_hh_host.o \
               $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_spr_apu.o \
+              $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_lmu_apu.o \
               $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_dma_client.o \
               $(WOLFHSM_INFINEON_TC4XX)/port/client/tchsm_time.o
     endif
