@@ -2546,9 +2546,11 @@ ifeq ($(ARCH), AURIX)
     MATH_OBJS+=$(WOLFBOOT_LIB_WOLFSSL)/wolfcrypt/src/sp_c32.o
 
     # wolfHSM port CommBuf placement: COMMBUF=DSPR (default) or LMU
-    ifeq ($(COMMBUF),LMU)
+    ifeq ($(strip $(COMMBUF)),LMU)
       CFLAGS += -DTCHSM_CFG_COMMBUF_LMU
       LDFLAGS += -Wl,--defsym=TCHSM_LSL_COMMBUF_LMU=1
+    else ifneq ($(filter-out DSPR,$(strip $(COMMBUF))),)
+      $(error Unsupported COMMBUF='$(COMMBUF)'. Supported: DSPR, LMU)
     endif
 
     # wolfHSM support
